@@ -10,31 +10,34 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.text.NumberFormat
 
 interface Counter {
-    fun onIncrement()
-    fun onDecrement()
+    fun increment()
+    fun decrement()
 }
+
+fun formatCount(count: Int): String =
+    NumberFormat.getNumberInstance().format(count)
 
 @Composable
 fun Count(count: Int) {
-    Text("$count",
-        fontSize = TextUnit.Companion.Sp(36)
-    )
+    Text(formatCount(count), fontSize = TextUnit.Companion.Sp(36))
 }
 
+@ExperimentalCoroutinesApi
 @Composable
 fun CounterScreen(count: Int, counter: Counter) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Count(count)
-        Spacer(Modifier.preferredHeight(16.dp ))
+        Spacer(Modifier.preferredHeight(16.dp))
 
         Row {
-            Button(onClick=counter::onDecrement) {
+            Button(onClick=counter::decrement) {
                 Text("-")
             }
 
-            Button(onClick=counter::onIncrement) {
+            Button(onClick=counter::increment) {
                 Text("+")
             }
         }
@@ -45,5 +48,5 @@ fun CounterScreen(count: Int, counter: Counter) {
 @Composable
 @ExperimentalCoroutinesApi
 fun PreviewCounter() {
-    CounterScreen(count=10, counter=CountInteractor())
+    CounterScreen(count=1234, counter=CounterInteractor())
 }

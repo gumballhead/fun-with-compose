@@ -15,10 +15,6 @@ interface ResultView<Model> : View<Model> {
     }
 }
 
-sealed class AsyncState<Model>
-class Loading<Model>: AsyncState<Model>()
-class Complete<Model>(val result: Result<Model>): AsyncState<Model>()
-
 interface AsyncView<Model> : ResultView<Model> {
     fun renderLoading()
 

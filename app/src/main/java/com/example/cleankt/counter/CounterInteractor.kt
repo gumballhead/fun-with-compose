@@ -7,12 +7,12 @@ fun increment(count: Int) = count + 1
 fun decrement(count: Int) = count - 1
 
 @ExperimentalCoroutinesApi
-class CountInteractor : Interactor<Int>(0), Counter {
-    override fun onIncrement() {
+class CounterInteractor : Counter, Interactor<Int>(0) {
+    override fun increment() {
         dispatch(::increment)
     }
 
-    override fun onDecrement() {
+    override fun decrement() {
         dispatch(::decrement)
     }
 }

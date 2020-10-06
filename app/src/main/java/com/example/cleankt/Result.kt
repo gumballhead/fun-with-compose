@@ -26,3 +26,7 @@ class Failure<T>(val error: Throwable) : Result<T>() {
     override fun <R> flatMap(op: (T) -> Result<R>) = Failure<R>(error)
     override fun unwrap() = throw error
 }
+
+sealed class AsyncState<Model>
+class Loading<Model>: AsyncState<Model>()
+class Complete<Model>(val result: Result<Model>): AsyncState<Model>()
